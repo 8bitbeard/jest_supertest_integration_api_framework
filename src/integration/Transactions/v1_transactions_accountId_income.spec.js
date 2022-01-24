@@ -1,3 +1,10 @@
+/**
+ * Flask Finances API Integration Tests
+ *
+ * @group @flask_finances_api
+ * @group @transactions
+*/
+
 import request from 'supertest';
 
 const baseUrl = 'http://localhost:5000/api'
@@ -5,7 +12,7 @@ const endpointPath = '/v1/transactions/{accountId}/income'
 
 describe('Transactions', () => {
     describe('POST /v1/transactions/{accountId}/income', () => {
-        it('deve criar uma transação de depósito com sucesso', async () => {
+        it('@smoke - deve criar uma transação de depósito com sucesso', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');

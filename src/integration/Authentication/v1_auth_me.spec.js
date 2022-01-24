@@ -1,3 +1,10 @@
+/**
+ * Flask Finances API Integration Tests
+ *
+ * @group @flask_finances_api
+ * @group @authentication
+*/
+
 import request from 'supertest';
 
 const baseUrl = 'http://localhost:5000/api'
@@ -5,7 +12,7 @@ const endpointPath = '/v1/auth/me'
 
 describe('Authentication', () => {
     describe('GET /v1/auth/me', () => {
-        it('deve retornar com sucesso os dados do usuário logado', async () => {
+        it('@smoke - deve retornar com sucesso os dados do usuário logado', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
 

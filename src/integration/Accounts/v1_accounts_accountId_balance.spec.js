@@ -1,3 +1,10 @@
+/**
+ * Flask Finances API Integration Tests
+ *
+ * @group @flask_finances_api
+ * @group @accounts
+*/
+
 import request from 'supertest';
 
 const baseUrl = 'http://localhost:5000/api'
@@ -5,7 +12,7 @@ const endpointPath = '/v1/accounts/{accountId}/balance'
 
 describe('Accounts', () => {
     describe('GET /v1/accounts/{accountId}/balance', () => {
-        it('deve retornar o saldo da conta com sucesso', async () => {
+        it('@smoke - deve retornar o saldo da conta com sucesso', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');

@@ -1,3 +1,10 @@
+/**
+ * Flask Finances API Integration Tests
+ *
+ * @group @flask_finances_api
+ * @group @categories
+*/
+
 import request from 'supertest';
 
 const baseUrl = 'http://localhost:5000/api'
@@ -5,7 +12,7 @@ const endpointPath = '/v1/categories/'
 
 describe('Categories', () => {
     describe('POST /v1/categories/', () => {
-        it('deve cadastrar uma categoria de entrada com sucesso', async () => {
+        it('@smoke - deve cadastrar uma categoria de entrada com sucesso', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
             const categoryData = {
@@ -161,7 +168,7 @@ describe('Categories', () => {
     })
 
     describe('GET /v1/categories/', () => {
-        it('deve retornar uma lista contendo todas as caregorias cadastradas pelo usuário logado', async () => {
+        it('@smoke - deve retornar uma lista contendo todas as caregorias cadastradas pelo usuário logado', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
 

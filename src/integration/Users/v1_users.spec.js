@@ -1,3 +1,11 @@
+/**
+ * Flask Finances API Integration Tests
+ *
+ * @group @flask_finances_api
+ * @group @#wilton_souza
+ * @group @users
+*/
+
 import request from 'supertest';
 
 const baseUrl = 'http://localhost:5000/api'
@@ -5,7 +13,7 @@ const endpointPath = '/v1/users/'
 
 describe('Users', () => {
     describe('POST /v1/users/', () => {
-        it('deve retornar com sucesso os dados do usuário logado', async () => {
+        it('@smoke - deve retornar com sucesso os dados do usuário logado', async () => {
             const randomNumber = generateRandomNumber(10000);
             const userData = {
                 name: `QATMP${randomNumber}`,
@@ -139,7 +147,7 @@ describe('Users', () => {
     })
 
     describe('GET /v1/users/', () => {
-        it('deve retornar uma lista contendo todos os usuários cadastrados', async () => {
+        it('@smoke - deve retornar uma lista contendo todos os usuários cadastrados', async () => {
             const response = await request(baseUrl).get(endpointPath);
 
             expect(response.statusCode).toBe(200);

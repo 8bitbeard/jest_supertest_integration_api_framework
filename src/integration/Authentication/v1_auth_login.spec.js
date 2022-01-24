@@ -1,3 +1,10 @@
+/**
+ * Flask Finances API Integration Tests
+ *
+ * @group @flask_finances_api
+ * @group @authentication
+*/
+
 import request from 'supertest';
 
 const baseUrl = 'http://localhost:5000/api'
@@ -5,7 +12,7 @@ const endpointPath = '/v1/auth/login'
 
 describe('Authentication', () => {
     describe('POST /v1/auth/login', () => {
-        it('deve realizar o login de um usuário válido com sucesso', async () => {
+        it('@smoke - deve realizar o login de um usuário válido com sucesso', async () => {
             var userData = apiDataLoad('users', 'valid');
 
             const response = await request(baseUrl).post(endpointPath).send({
