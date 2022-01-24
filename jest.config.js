@@ -104,10 +104,10 @@ module.exports = {
     [
       "jest-stare",
       {
-        "resultDir": "reports/topcat_api",
-        "reportTitle": "TopcatAPI",
-        "resultHtml": "report_topcat_api.html",
-        "reportHeadline": "Topcat API",
+        "resultDir": "reports/flask_finances_api",
+        "reportTitle": "Flask Finances API",
+        "resultHtml": "report_flask_finances_api.html",
+        "reportHeadline": "Flask Finances API",
         "reportSummary": true
       }
     ]
