@@ -9,10 +9,18 @@
     "jest-extended": "^1.2.0",
     "jest-runner-groups": "^2.1.0",
     "jest-stare": "^2.3.0",
+    "joi": "^17.5.0",
     "supertest": "^6.2.2"
   },
   "scripts": {
     "test": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest --verbose",
-    "test:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -t=\"@smoke\" --verbose"
+    "test:local:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=localhost jest -t=\"@smoke\" --verbose",
+    "test:local:contract": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=localhost jest -t=\"@contract\" --verbose",
+    "test:dev:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=development jest -t=\"@smoke\" --verbose",
+    "test:dev:contract": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=development jest -t=\"@contract\" --verbose",
+    "test:uat:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=testing jest -t=\"@smoke\" --verbose",
+    "test:uat:contract": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=testing jest -t=\"@contract\" --verbose",
+    "test:prd:smoke": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=production jest -t=\"@smoke\" --verbose",
+    "test:prd:contract": "NODE_TLS_REJECT_UNAUTHORIZED=0 ENVIRONMENT=production jest -t=\"@contract\" --verbose"
   }
 }

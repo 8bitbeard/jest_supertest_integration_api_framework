@@ -1,13 +1,6 @@
-import request from 'supertest';
+import * as PostLogin from '../../integration/Flask_Finances_API/Authentication/requests/v1_auth_login.request';
 
 global.generateBearerToken = async ({email, password}) => {
-    const baseUrl = 'http://localhost:5000/api';
-    const endpointPath = '/v1/auth/login';
-
-    const response = await request(baseUrl).post(endpointPath).send({
-        email: email,
-        password: password
-    });
-
+    const response = await PostLogin.authenticate({email, password})
     return response.body.access;
 }

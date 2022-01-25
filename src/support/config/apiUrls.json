@@ -1,0 +1,14 @@
+{
+    "localhost": {
+        "Flask_Finances_API": "http://localhost:5000/api"
+    },
+    "development": {
+        "Flask_Finances_API": "TODO: url"
+    },
+    "testing": {
+        "Flask_Finances_API": "TODO: url"
+    },
+    "production": {
+        "Flask_Finances_API": "TODO: url"
+    }
+}
