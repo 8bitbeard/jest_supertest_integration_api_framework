@@ -5,9 +5,9 @@
  * @group @transactions
 */
 
-import { expenseTransactionSchema, errorSchema, errorTokenSchema } from '../contracts/v1_transactions_accountId_expense.contract';
+import { transactionSchema, errorSchema, errorTokenSchema } from '../contracts/TransactionContract';
 import ExpenseTransactionRequest from '../requests/v1_transactions_accountId_expense.request'
-import ExpenseTransactionFactory from '../factories/v1_transactions_accountId_expense.factory';
+import TransactionFactory from '../factories/TransactionFactory';
 
 describe('Transactions', () => {
     describe('POST /v1/transactions/{accountId}/expense', () => {
@@ -16,10 +16,10 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
-            const { error } = expenseTransactionSchema.validate(response.body, { abortEarly: false });
+            const { error } = transactionSchema.validate(response.body, { abortEarly: false });
             expect(error).toBeUndefined();
         })
 
@@ -28,7 +28,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'income')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.invalidTransactionData(categoryData, token)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
             const { error } = errorSchema.validate(response.body, { abortEarly: false });
@@ -38,7 +38,7 @@ describe('Transactions', () => {
         it('@contract - deve validar o contrato de retorno de erro no token do serviço de criação de transação de saída', async () => {
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'income')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData);
             const { error } = errorTokenSchema.validate(response.body, { abortEarly: false });
@@ -50,7 +50,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -66,7 +66,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'income')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -82,7 +82,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'invalid_name');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -98,7 +98,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'inexistent')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -114,7 +114,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newInvalidExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.invalidTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -128,7 +128,7 @@ describe('Transactions', () => {
         it('deve retornar um erro ao tentar criar uma transação sem passar o bearer token', async () => {
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData);
 
@@ -141,7 +141,7 @@ describe('Transactions', () => {
             const token = apiDataLoad('tokens', 'expired').value;
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -154,7 +154,7 @@ describe('Transactions', () => {
             const token = apiDataLoad('tokens', 'invalid_value').value;
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 
@@ -167,7 +167,7 @@ describe('Transactions', () => {
             const token = apiDataLoad('tokens', 'invalid_type').value;
             const accountData = apiDataLoad('accounts', 'valid');
             const categoryData = apiDataLoad('categories', 'expense')
-            const transactionData = ExpenseTransactionFactory.newExpenseTransactionData(categoryData)
+            const transactionData = TransactionFactory.validTransactionData(categoryData)
 
             const response = await ExpenseTransactionRequest.createExpenseTransaction(transactionData, accountData, token);
 

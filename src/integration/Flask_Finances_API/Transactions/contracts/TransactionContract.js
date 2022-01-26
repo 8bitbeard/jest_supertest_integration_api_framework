@@ -1,12 +1,14 @@
 import Joi from 'joi';
 import { categorySchema } from '../../Categories/contracts/v1_categories.contract'
 
-const expenseTransactionSchema = Joi.object({
+const transactionSchema = Joi.object({
   id: Joi.string().guid({version:'uuidv4'}),
   value: Joi.string(),
   created_at: Joi.date(),
   category: categorySchema
 });
+
+const transactionListSchema = Joi.array().items(transactionSchema);
 
 const errorSchema = Joi.object({
     code: Joi.string(),
@@ -18,4 +20,4 @@ const errorTokenSchema = Joi.object({
   msg: Joi.string()
 })
 
-export { expenseTransactionSchema, errorSchema, errorTokenSchema };
+export { transactionSchema, transactionListSchema, errorSchema, errorTokenSchema };

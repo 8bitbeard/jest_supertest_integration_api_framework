@@ -5,35 +5,48 @@
  * @group @transactions
 */
 
-import request from 'supertest';
-
-const baseUrl = 'http://localhost:5000/api'
-const endpointPath = '/v1/transactions/{accountId}/extract'
+import { transactionListSchema, errorSchema, errorTokenSchema } from '../contracts/TransactionContract';
+import ExtractTransactionRequest from '../requests/v1_transactions_accountId_extract.request'
 
 describe('Transactions', () => {
     describe('POST /v1/transactions/{accountId}/extract', () => {
-        it('@smoke - deve criar uma transação de depósito com sucesso', async () => {
+        it('@contract - deve validar o contrato de retorno de sucesso do serviço de listagem do extrato', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
+            const { error } = transactionListSchema.validate(response.body, { abortEarly: false });
+            expect(error).toBeUndefined();
+        })
+
+        it('@contract - deve validar o contrato de retorno de erro do serviço de listagem do extrato', async () => {
+            const userData = apiDataLoad('users', 'valid');
+            const token = await generateBearerToken(userData);
+            const accountData = apiDataLoad('accounts', 'invalid_name');
+
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
+            const { error } = errorSchema.validate(response.body, { abortEarly: false });
+            expect(error).toBeUndefined();
+        })
+
+        it('@contract - deve validar o contrato de retorno de erro no token do serviço de listagem do extrato', async () => {
+            const accountData = apiDataLoad('accounts', 'valid');
+
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData);
+            const { error } = errorTokenSchema.validate(response.body, { abortEarly: false });
+            expect(error).toBeUndefined();
+        })
+
+        it('@smoke - listar o extrato de transações da conta do usuário com sucesso', async () => {
+            const userData = apiDataLoad('users', 'valid');
+            const token = await generateBearerToken(userData);
+            const accountData = apiDataLoad('accounts', 'valid');
+
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
 
             expect(response.statusCode).toBe(200);
-            expect(response.body).toBeArray();
-            response.body.forEach((obj) => {
-                expect(obj.id).toBeString();
-                expect(obj.value).toMatch(/^R\$ [0-9]*,[0-9][0-9]$/);
-                expect(obj.created_at).toBeString();
-                expect(obj.category.id).toBeString();
-                expect(obj.category.name).toBeString();
-                expect([
-                    apiDataLoad('categories', 'valid income').enum,
-                    apiDataLoad('categories', 'valid expense').enum
-                ]).toContain(obj.category.type);
-            })
+            expect(response.body).not.toBeEmpty();
         })
 
         it('deve retornar um erro ao buscar o extrato de uma conta inexistente', async () => {
@@ -41,9 +54,7 @@ describe('Transactions', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'invalid_name');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'account_not_found');
             expect(response.statusCode).toBe(expectedError.status);
@@ -55,7 +66,7 @@ describe('Transactions', () => {
         it('deve retornar um erro ao buscar o extrato de uma conta sem passar o bearer token', async () => {
             const accountData = apiDataLoad('accounts', 'valid');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id));
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData);
 
             const expectedError = apiDataLoad('default_errors', 'missing_bearer_token')
             expect(response.statusCode).toBe(expectedError.status);
@@ -66,9 +77,7 @@ describe('Transactions', () => {
             const token = apiDataLoad('tokens', 'expired').value;
             const accountData = apiDataLoad('accounts', 'valid');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            }).send(accountData);
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'expired_bearer_token')
             expect(response.statusCode).toBe(expectedError.status);
@@ -79,9 +88,7 @@ describe('Transactions', () => {
             const token = apiDataLoad('tokens', 'invalid_value').value;
             const accountData = apiDataLoad('accounts', 'valid');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            }).send(accountData);
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_format')
             expect(response.statusCode).toBe(expectedError.status);
@@ -92,9 +99,7 @@ describe('Transactions', () => {
             const token = apiDataLoad('tokens', 'invalid_type').value;
             const accountData = apiDataLoad('accounts', 'valid');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            }).send(accountData);
+            const response = await ExtractTransactionRequest.listTransactionsExtract(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_type')
             expect(response.statusCode).toBe(expectedError.status);

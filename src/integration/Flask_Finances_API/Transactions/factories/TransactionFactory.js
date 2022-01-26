@@ -1,5 +1,5 @@
-class ExpenseTransactionFactory {
-    newExpenseTransactionData({ name }) {
+class TransactionFactory {
+    validTransactionData({ name }) {
         const transactionData = {
             value: generateRandomFloat(1.0, 2.0),
             category: name
@@ -8,7 +8,7 @@ class ExpenseTransactionFactory {
         return transactionData
     }
 
-    newInvalidExpenseTransactionData({ name }) {
+    invalidTransactionData({ name }) {
         const transactionData = {
             value: -generateRandomFloat(1.0, 2.0),
             category: name
@@ -18,4 +18,4 @@ class ExpenseTransactionFactory {
     }
 }
 
-export default new ExpenseTransactionFactory;
+export default new TransactionFactory;
