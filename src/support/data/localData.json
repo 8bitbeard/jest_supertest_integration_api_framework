@@ -58,13 +58,12 @@
     ],
     "tokens": [
       {
-        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzE2MDAwNCwianRpIjoiZTU0NWU3NGUtMWFlZC00YjQxLTgyZmUtNGQ1NjU4ZDA5NWQ1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjM0NWI3NmZiLTVkNmItNDk2OS1iMmY1LTg2NjM4YWM4OGFkMCIsIm5iZiI6MTY0MzE2MDAwNCwiZXhwIjoxNjQzMTYwOTA0fQ.8fEnQdfhOnyQfTqCAxCIptpK_rO-CW6-HnA7w66q9iA",
-        "profiles": [
+        "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzE5MzI5MSwianRpIjoiYTJkNTI4YjMtNDllNi00MTI1LWE3NDQtZjkzZjQ4ZjhiZGRjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjU4MDJmZjAwLTJhY2EtNDlmYS1hMTc3LTAyODkyNTEzNjczNCIsIm5iZiI6MTY0MzE5MzI5MSwiZXhwIjoxNjQzMTk0MTkxfQ.81dWO2yxJ0T-NSP6UuKWjBdO7rO_3Ld1U2UdKYryfis",        "profiles": [
           "expired"
         ]
       },
       {
-        "value": "XPTO",
+        "value": "Bearer XPTO",
         "profiles": [
           "invalid_value"
         ]
@@ -78,7 +77,7 @@
     ],
     "accounts": [
       {
-        "id": "c5143ed-582f-4d08-853e-3797806f8c2b",
+        "id": "0c5143ed-582f-4d08-853e-3797806f8c2b",
         "name": "Poupança Banco X",
         "balance": "",
         "profiles": [
@@ -88,9 +87,17 @@
       {
         "id": "58632d74-897c-48ab-a8d1-1077f9abeb7e",
         "name": "AB",
+        "balance": 0,
+        "profiles": [
+          "invalid_name"
+        ]
+      },
+      {
+        "id": "58632d74-897c-48ab-a8d1-1077f9abeb7e",
+        "name": "Valid Name",
         "balance": "XPTO",
         "profiles": [
-          "invalid"
+          "invalid_balance"
         ]
       }
     ],

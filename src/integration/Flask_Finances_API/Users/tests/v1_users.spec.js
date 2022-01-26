@@ -2,7 +2,7 @@
  * Flask Finances API Integration Tests
  *
  * @group @flask_finances_api
- * @group @UserRequest
+ * @group @Users
 */
 
 import { userSchema, userListSchema, errorSchema } from '../contracts/v1_users.contract';
@@ -10,7 +10,7 @@ import UserRequest from '../requests/v1_users.request'
 import UserFactory from '../factories/v1_users.factory';
 
 describe('users', () => {
-    describe('POST /v1/UserRequest/', () => {
+    describe('POST /v1/users/', () => {
 
         it('@contract - deve validar o contrato de retorno de sucesso do serviço de criação de usuários', async () => {
             const userData = UserFactory.newUserData();

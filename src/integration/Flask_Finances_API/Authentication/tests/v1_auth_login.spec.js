@@ -5,11 +5,6 @@
  * @group @authentication
 */
 
-// import request from 'supertest';
-
-// const baseUrl = 'http://localhost:5000/api'
-// const endpointPath = '/v1/auth/login'
-
 import * as PostLogin from '../requests/v1_auth_login.request';
 import { validLoginSchema, errorLoginSchema } from '../contracts/v1_auth_login.contract';
 

@@ -2,5 +2,5 @@ import * as PostLogin from '../../integration/Flask_Finances_API/Authentication/
 
 global.generateBearerToken = async ({email, password}) => {
     const response = await PostLogin.authenticate({email, password})
-    return response.body.access;
+    return `Bearer ${response.body.access}`;
 }
