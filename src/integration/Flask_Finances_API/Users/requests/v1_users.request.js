@@ -1,27 +1,33 @@
 import request from 'supertest';
 import apiUrls from '../../../../support/config/apiUrls.json'
 
-const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'localhost'
-const baseUrl = apiUrls[env]['Flask_Finances_API']
-const endpointPath = '/v1/users/'
+class UserRequest {
 
-function createUser({name, email, password}) {
-    return request(baseUrl)
-        .post(endpointPath)
-        .set({ "Content-Type": 'application/json' })
-        .send({
-            name: name,
-            email: email,
-            password: password
-        })
+    constructor() {
+        this.env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'localhost'
+        this.baseUrl = apiUrls[this.env]['Flask_Finances_API']
+        this.endpointPath = '/v1/users/'
+    }
+
+    createUser({name, email, password}) {
+        return request(this.baseUrl)
+            .post(this.endpointPath)
+            .set({ "Content-Type": 'application/json' })
+            .send({
+                name: name,
+                email: email,
+                password: password
+            })
+    }
+
+    getAllUsers() {
+        return request(this.baseUrl)
+            .get(this.endpointPath)
+            .set({
+                "Content-Type": "application/json"
+            })
+    }
+
 }
 
-function getAllUsers() {
-    return request(baseUrl)
-        .get(endpointPath)
-        .set({
-            "Content-Type": "application/json"
-        })
-}
-
-export { createUser, getAllUsers }
+export default new UserRequest;

@@ -1,42 +1,44 @@
-function newUserData() {
-    const randomNumber = generateRandomNumber(10000);
-    const userData = {
-        name: `QATMP${randomNumber}`,
-        email: `qa_tmp_${randomNumber}@example.com`,
-        password: '123456'
+class UserFactory {
+    newUserData() {
+        const randomNumber = generateRandomNumber(10000);
+        const userData = {
+            name: `QATMP${randomNumber}`,
+            email: `qa_tmp_${randomNumber}@example.com`,
+            password: '123456'
+        }
+
+        return userData
     }
 
-    return userData
-}
+    newUserWithoutName() {
+        const randomNumber = generateRandomNumber(10000);
+        const userData = {
+            email: `qa_tmp_${randomNumber}@example.com`,
+            password: '123456'
+        }
 
-function newUserWithoutName() {
-    const randomNumber = generateRandomNumber(10000);
-    const userData = {
-        email: `qa_tmp_${randomNumber}@example.com`,
-        password: '123456'
+        return userData
     }
 
-    return userData
-}
+    newUserWithoutEmail() {
+        const randomNumber = generateRandomNumber(10000);
+        const userData = {
+            name: `QATMP${randomNumber}`,
+            password: '123456'
+        }
 
-function newUserWithoutEmail() {
-    const randomNumber = generateRandomNumber(10000);
-    const userData = {
-        name: `QATMP${randomNumber}`,
-        password: '123456'
+        return userData
     }
 
-    return userData
-}
+    newUserWithoutPassword() {
+        const randomNumber = generateRandomNumber(10000);
+        const userData = {
+            name: `QATMP${randomNumber}`,
+            email: `qa_tmp_${randomNumber}@example.com`,
+        }
 
-function newUserWithoutPassword() {
-    const randomNumber = generateRandomNumber(10000);
-    const userData = {
-        name: `QATMP${randomNumber}`,
-        email: `qa_tmp_${randomNumber}@example.com`,
+        return userData
     }
-
-    return userData
 }
 
-export { newUserData, newUserWithoutName, newUserWithoutEmail, newUserWithoutPassword }
+export default new UserFactory;

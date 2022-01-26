@@ -1,7 +1,7 @@
 {
     "users": [
       {
-        "id": "49efb475-0428-4d14-8a86-490f256d0b90",
+        "id": "5802ff00-2aca-49fa-a177-028925136734",
         "name": "UnixUser",
         "email": "unix_user@example.com",
         "password": "123456",
@@ -11,7 +11,7 @@
         ]
       },
       {
-        "id": "49efb475-0428-4d14-8a86-490f256d0b90",
+        "id": "5802ff00-2aca-49fa-a177-028925136734",
         "name": "UnixUser",
         "email": "unix_user@example.com",
         "password": "abc123",
@@ -78,8 +78,8 @@
     ],
     "accounts": [
       {
-        "id": "67dea9a8-59a3-489f-b8d5-ec4b651f57b4",
-        "name": "Poupança Caixa",
+        "id": "c5143ed-582f-4d08-853e-3797806f8c2b",
+        "name": "Poupança Banco X",
         "balance": "",
         "profiles": [
           "valid"
@@ -96,7 +96,7 @@
     ],
     "categories": [
       {
-        "id": "57207a24-4539-44f8-85dc-5dd59031b9f7",
+        "id": "b4b5155a-a78b-4a15-9dc1-eb8ddee58b79",
         "name": "Salário",
         "type": "Entrada",
         "value": "E",
@@ -106,7 +106,7 @@
         ]
       },
       {
-        "id": "0186d8e7-2691-4875-8f16-3b178248c8ce",
+        "id": "fa4ff6d2-0491-4661-99bf-773832faf9f5",
         "name": "Mercado",
         "type": "Saída",
         "value": "S",
