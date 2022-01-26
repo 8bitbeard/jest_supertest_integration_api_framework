@@ -102,15 +102,32 @@ module.exports = {
   reporters: [
     "default",
     [
-      "jest-stare",
+      "jest-html-reporters",
       {
-        "resultDir": "reports/flask_finances_api",
-        "reportTitle": "Flask Finances API",
-        "resultHtml": "report_flask_finances_api.html",
-        "reportHeadline": "Flask Finances API",
-        "reportSummary": true
+        "publicPath": "reports",
+        "filename": "report_api_integration.html",
+        "pageTitle": "API Integration Tests",
+        // "logoImgPath": "reports/image/petlove_logo.png",
+        // "failureMessageOnly": true,
+        "customInfos": [
+          {
+            title: 'Environment',
+            value: process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'localhost'
+          }
+        ]
       }
     ]
+    // [
+    //   "jest-stare",
+    //   {
+    //     "resultDir": "reports",
+    //     "reportTitle": "API Integration Tests",
+    //     "resultHtml": "report_api_integration.html",
+    //     "reportHeadline": "API Integration Tests",
+    //     "reportSummary": true,
+    //     "hidePending": true
+    //   }
+    // ]
   ],
 
   // Automatically reset mock state before every test
@@ -172,7 +189,7 @@ module.exports = {
   // testRegex: [],
 
   // This option allows the use of a custom results processor
-  testResultsProcessor: "./node_modules/jest-stare",
+  // testResultsProcessor: "./node_modules/jest-stare",
 
   // This option allows use of a custom test runner
   // testRunner: "jest-circus/runner",
