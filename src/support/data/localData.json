@@ -27,11 +27,38 @@
         "profiles": [
           "invalid"
         ]
+      },
+      {
+        "id": "cb9a26c7-057d-4c09-a6b0-958c380ebb60",
+        "name": "Invalid Name",
+        "email": "invalid_name@example.com",
+        "password": "123765",
+        "profiles": [
+          "invalid_name"
+        ]
+      },
+      {
+        "id": "cb9a26c7-057d-4c09-a6b0-958c380ebb60",
+        "name": "InvalidEmail",
+        "email": "invalid_emailexample.com",
+        "password": "123765",
+        "profiles": [
+          "invalid_email"
+        ]
+      },
+      {
+        "id": "cb9a26c7-057d-4c09-a6b0-958c380ebb60",
+        "name": "InvalidPassword",
+        "email": "invalid_password@example.com",
+        "password": "12376",
+        "profiles": [
+          "invalid_password"
+        ]
       }
     ],
     "tokens": [
       {
-        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzNDUwNDkzNiwianRpIjoiMzIwOTQyZTItMTJmNy00YTViLTliYmMtN2FjZTE1Mzc3NWJhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImQ0ZjViYTY1LTdmYjgtNDVkNC04ODJkLWEwMDQ4NjcyMjc1MCIsIm5iZiI6MTYzNDUwNDkzNiwiZXhwIjoxNjM0NTA1ODM2fQ.eqvductWElUoNmxcgsE_uKsJ0sFqhz0FDYYyOgp5Tro",
+        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzE2MDAwNCwianRpIjoiZTU0NWU3NGUtMWFlZC00YjQxLTgyZmUtNGQ1NjU4ZDA5NWQ1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjM0NWI3NmZiLTVkNmItNDk2OS1iMmY1LTg2NjM4YWM4OGFkMCIsIm5iZiI6MTY0MzE2MDAwNCwiZXhwIjoxNjQzMTYwOTA0fQ.8fEnQdfhOnyQfTqCAxCIptpK_rO-CW6-HnA7w66q9iA",
         "profiles": [
           "expired"
         ]
@@ -51,8 +78,8 @@
     ],
     "accounts": [
       {
-        "id": "01c7fac2-e178-4937-9837-cadee0507462",
-        "name": "",
+        "id": "67dea9a8-59a3-489f-b8d5-ec4b651f57b4",
+        "name": "Poupança Caixa",
         "balance": "",
         "profiles": [
           "valid"
@@ -69,6 +96,7 @@
     ],
     "categories": [
       {
+        "id": "57207a24-4539-44f8-85dc-5dd59031b9f7",
         "name": "Salário",
         "type": "Entrada",
         "value": "E",
@@ -78,6 +106,7 @@
         ]
       },
       {
+        "id": "0186d8e7-2691-4875-8f16-3b178248c8ce",
         "name": "Mercado",
         "type": "Saída",
         "value": "S",
@@ -87,6 +116,7 @@
         ]
       },
       {
+        "id": "0156d8e6-2691-2875-8f16-3b178248z6yr",
         "name": "Categoria Inexistente",
         "type": "",
         "value": "I",
