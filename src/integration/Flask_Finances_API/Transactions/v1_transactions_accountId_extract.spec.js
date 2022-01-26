@@ -30,8 +30,8 @@ describe('Transactions', () => {
                 expect(obj.category.id).toBeString();
                 expect(obj.category.name).toBeString();
                 expect([
-                    apiDataLoad('categories', 'valid income').type,
-                    apiDataLoad('categories', 'valid expense').type
+                    apiDataLoad('categories', 'valid income').enum,
+                    apiDataLoad('categories', 'valid expense').enum
                 ]).toContain(obj.category.type);
             })
         })

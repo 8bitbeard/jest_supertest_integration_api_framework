@@ -1,12 +1,12 @@
 class AccountFactory {
     newAccountData(balance = null) {
         const randomNumber = generateRandomNumber(10000);
-        const categoryData = {
+        const accountData = {
             name: `QATMP${randomNumber}`,
             balance: balance ? balance : 0
         }
 
-        return categoryData
+        return accountData
     }
 }
 

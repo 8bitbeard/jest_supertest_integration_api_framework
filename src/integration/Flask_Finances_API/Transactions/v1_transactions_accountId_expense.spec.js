@@ -32,7 +32,7 @@ describe('Transactions', () => {
             expect(response.body.created_at).toBeString();
             expect(response.body.category.id).toBeString();
             expect(response.body.category.name).toBe(categoryData.name);
-            expect(response.body.category.type).toBe(apiDataLoad('categories', 'valid expense').type);
+            expect(response.body.category.type).toBe(apiDataLoad('categories', 'valid expense').enum);
         })
 
         it('deve retornar um erro ao tentar criar uma transação com uma categoria de entrada', async () => {
