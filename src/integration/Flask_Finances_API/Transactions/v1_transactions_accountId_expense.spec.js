@@ -12,7 +12,7 @@ const endpointPath = '/v1/transactions/{accountId}/expense'
 
 describe('Transactions', () => {
     describe('POST /v1/transactions/{accountId}/expense', () => {
-        it('@smoke - deve criar uma transação de depósito com sucesso', async () => {
+        it('@smoke - deve criar uma transação de saque com sucesso', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
