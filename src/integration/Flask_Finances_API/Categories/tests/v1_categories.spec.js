@@ -10,8 +10,8 @@
 // const baseUrl = 'http://localhost:5000/api'
 // const endpointPath = '/v1/categories/'
 
-import { categorySchema, categoryListSchema, errorSchema, errorTokenSchema } from '../contracts/v1_categories.contract';
-import CategoryFactory from '../factories/v1_categories.factory';
+import { categorySchema, categoryListSchema, errorSchema, errorTokenSchema } from '../contracts/CategoryContract';
+import CategoryFactory from '../factories/CategoryFactory';
 import CategoryRequest from '../requests/v1_categories.request'
 
 describe('Categories', () => {

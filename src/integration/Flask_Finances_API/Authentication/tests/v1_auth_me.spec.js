@@ -6,7 +6,7 @@
 */
 
 import * as GetMe from '../requests/v1_auth_me.request';
-import { userSchema, errorTokenSchema } from '../contracts/v1_auth_me.contract';
+import { userSchema, errorTokenSchema } from '../contracts/MeContract';
 
 describe('Authentication', () => {
     describe('GET /v1/auth/me', () => {

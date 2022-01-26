@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { categorySchema } from '../../Categories/contracts/v1_categories.contract'
+import { categorySchema } from '../../Categories/contracts/CategoryContract'
 
 const transactionSchema = Joi.object({
   id: Joi.string().guid({version:'uuidv4'}),

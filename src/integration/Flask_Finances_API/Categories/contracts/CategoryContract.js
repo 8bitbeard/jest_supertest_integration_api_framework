@@ -6,13 +6,7 @@ const categorySchema = Joi.object({
   type: Joi.string().valid('Entrada','Saída').required()
 });
 
-const categoryListSchema = Joi.array().items(
-  Joi.object({
-    id: Joi.string().guid({version:'uuidv4'}),
-    name: Joi.string(),
-    type: Joi.string().valid('Entrada','Saída').required()
-  })
-);
+const categoryListSchema = Joi.array().items(categorySchema);
 
 const errorSchema = Joi.object({
     code: Joi.string(),

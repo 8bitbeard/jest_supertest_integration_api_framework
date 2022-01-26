@@ -6,7 +6,7 @@
 */
 
 import * as PostLogin from '../requests/v1_auth_login.request';
-import { validLoginSchema, errorLoginSchema } from '../contracts/v1_auth_login.contract';
+import { validLoginSchema, errorLoginSchema } from '../contracts/LoginContract';
 
 describe('Authentication', () => {
     describe('POST /v1/auth/login', () => {

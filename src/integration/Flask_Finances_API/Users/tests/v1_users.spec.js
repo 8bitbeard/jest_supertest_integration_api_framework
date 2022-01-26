@@ -5,9 +5,9 @@
  * @group @Users
 */
 
-import { userSchema, userListSchema, errorSchema } from '../contracts/v1_users.contract';
+import { userSchema, userListSchema, errorSchema } from '../contracts/UserContract';
 import UserRequest from '../requests/v1_users.request'
-import UserFactory from '../factories/v1_users.factory';
+import UserFactory from '../factories/UserFactory';
 
 describe('users', () => {
     describe('POST /v1/users/', () => {
