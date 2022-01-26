@@ -17,7 +17,6 @@ describe('Accounts', () => {
 
             const response = await BalaceRequest.getAccountBalance(accountData, token);
 
-            console.log(response.body)
             const { error } = balanceSchema.validate(response.body, { abortEarly: false });
             expect(error).toBeUndefined();
         })
