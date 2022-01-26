@@ -13,7 +13,7 @@ describe('Authentication', () => {
 
         it('@contract - deve validar o contrato do retorno de sucesso', async () => {
             const userData = apiDataLoad('users', 'valid');
-            const token = `Bearer ${await generateBearerToken(userData)}`;
+            const token = await generateBearerToken(userData);
 
             const response = await GetMe.getUserInfo(token);
 
@@ -32,7 +32,7 @@ describe('Authentication', () => {
 
         it('@smoke - deve retornar com sucesso os dados do usuário logado', async () => {
             const userData = apiDataLoad('users', 'valid');
-            const token = `Bearer ${await generateBearerToken(userData)}`;
+            const token = await generateBearerToken(userData);
 
             const response = await GetMe.getUserInfo(token);
 
@@ -51,7 +51,7 @@ describe('Authentication', () => {
         })
 
         it('deve retornar um erro quando informar um bearer token expirado', async () => {
-            const token = `Bearer ${apiDataLoad('tokens', 'expired').value}`
+            const token = apiDataLoad('tokens', 'expired').value;
 
             const response = await GetMe.getUserInfo(token);
 
@@ -61,7 +61,7 @@ describe('Authentication', () => {
         })
 
         it('deve retornar um erro quando informar um bearer token inválido', async () => {
-            const token = `Bearer ${apiDataLoad('tokens', 'invalid_value').value}`
+            const token = apiDataLoad('tokens', 'invalid_value').value
 
             const response = await GetMe.getUserInfo(token);
 

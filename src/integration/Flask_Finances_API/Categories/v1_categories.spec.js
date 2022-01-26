@@ -21,7 +21,7 @@ describe('Categories', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(categoryData);
 
             expect(response.statusCode).toBe(201);
@@ -39,7 +39,7 @@ describe('Categories', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(categoryData);
 
             expect(response.statusCode).toBe(201);
@@ -57,7 +57,7 @@ describe('Categories', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(categoryData);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_category_type');
@@ -73,7 +73,7 @@ describe('Categories', () => {
             const categoryData = apiDataLoad('categories', 'valid income')
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send({
                 name: categoryData.name,
                 type: categoryData.value
@@ -92,7 +92,7 @@ describe('Categories', () => {
             const categoryData = apiDataLoad('categories', 'valid expense')
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send({
                 name: categoryData.name,
                 type: categoryData.value
@@ -126,7 +126,7 @@ describe('Categories', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(categoryData);
 
             const expectedError = apiDataLoad('default_errors', 'expired_bearer_token')
@@ -142,7 +142,7 @@ describe('Categories', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(categoryData);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_format')
@@ -173,7 +173,7 @@ describe('Categories', () => {
             const token = await generateBearerToken(userData);
 
             const response = await request(baseUrl).get(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             });
 
             expect(response.statusCode).toBe(200);
@@ -200,7 +200,7 @@ describe('Categories', () => {
             const token = apiDataLoad('tokens', 'expired').value;
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             });
 
             const expectedError = apiDataLoad('default_errors', 'expired_bearer_token')
@@ -212,7 +212,7 @@ describe('Categories', () => {
             const token = apiDataLoad('tokens', 'invalid_value').value;
 
             const response = await request(baseUrl).post(endpointPath).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             });
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_format')

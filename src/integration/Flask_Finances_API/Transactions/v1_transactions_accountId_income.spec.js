@@ -23,7 +23,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             expect(response.statusCode).toBe(201);
@@ -46,7 +46,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             const expectedError = apiDataLoad('default_errors', 'incorrect_income_category');
@@ -59,7 +59,7 @@ describe('Transactions', () => {
         it('deve retornar um erro ao tentar criar uma transação para uma conta inexistente', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
-            const accountData = apiDataLoad('accounts', 'invalid');
+            const accountData = apiDataLoad('accounts', 'invalid_name');
             const categoryData = apiDataLoad('categories', 'income')
             const transactionData = {
                 value: generateRandomFloat(1.0, 2.0),
@@ -67,7 +67,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             const expectedError = apiDataLoad('default_errors', 'account_not_found');
@@ -88,7 +88,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             const expectedError = apiDataLoad('default_errors', 'category_not_found');
@@ -109,7 +109,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_transaction_value');
@@ -144,7 +144,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             const expectedError = apiDataLoad('default_errors', 'expired_bearer_token')
@@ -162,7 +162,7 @@ describe('Transactions', () => {
             };
 
             const response = await request(baseUrl).post(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(transactionData);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_format')

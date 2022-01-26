@@ -18,7 +18,7 @@ describe('Transactions', () => {
             const accountData = apiDataLoad('accounts', 'valid');
 
             const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             });
 
             expect(response.statusCode).toBe(200);
@@ -39,10 +39,10 @@ describe('Transactions', () => {
         it('deve retornar um erro ao buscar o extrato de uma conta inexistente', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
-            const accountData = apiDataLoad('accounts', 'invalid');
+            const accountData = apiDataLoad('accounts', 'invalid_name');
 
             const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             });
 
             const expectedError = apiDataLoad('default_errors', 'account_not_found');
@@ -67,7 +67,7 @@ describe('Transactions', () => {
             const accountData = apiDataLoad('accounts', 'valid');
 
             const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(accountData);
 
             const expectedError = apiDataLoad('default_errors', 'expired_bearer_token')
@@ -80,7 +80,7 @@ describe('Transactions', () => {
             const accountData = apiDataLoad('accounts', 'valid');
 
             const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: `Bearer ${token}`
+                Authorization: token
             }).send(accountData);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_format')
