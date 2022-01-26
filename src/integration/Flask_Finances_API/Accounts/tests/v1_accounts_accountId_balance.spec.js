@@ -5,24 +5,51 @@
  * @group @accounts
 */
 
-import request from 'supertest';
-
-const baseUrl = 'http://localhost:5000/api'
-const endpointPath = '/v1/accounts/{accountId}/balance'
+import { balanceSchema, errorSchema, errorTokenSchema } from '../contracts/v1_accounts_accountId_balance.contract';
+import BalaceRequest from '../requests/v1_accounts_accountId_balance.request'
 
 describe('Accounts', () => {
     describe('GET /v1/accounts/{accountId}/balance', () => {
+        it('@contract - deve validar o contrato de retorno de sucesso do serviço de listagem de saldo de contas', async () => {
+            const userData = apiDataLoad('users', 'valid');
+            const token = await generateBearerToken(userData);
+            const accountData = apiDataLoad('accounts', 'valid');
+
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
+
+            console.log(response.body)
+            const { error } = balanceSchema.validate(response.body, { abortEarly: false });
+            expect(error).toBeUndefined();
+        })
+
+        it('@contract - deve validar o contrato de retorno de erro do serviço de listagem de saldo de contas', async () => {
+            const userData = apiDataLoad('users', 'valid');
+            const token = await generateBearerToken(userData);
+            const accountData = apiDataLoad('accounts', 'invalid_name');
+
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
+
+            const { error } = errorSchema.validate(response.body, { abortEarly: false });
+            expect(error).toBeUndefined();
+        })
+
+        it('@contract - deve validar o contrato de retorno de erro no token do serviço de listagem de saldo de contas', async () => {
+            const accountData = apiDataLoad('accounts', 'valid');
+
+            const response = await BalaceRequest.getAccountBalance(accountData);
+
+            const { error } = errorTokenSchema.validate(response.body, { abortEarly: false });
+            expect(error).toBeUndefined();
+        })
+
         it('@smoke - deve retornar o saldo da conta com sucesso', async () => {
             const userData = apiDataLoad('users', 'valid');
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'valid');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
 
             expect(response.statusCode).toBe(200);
-            expect(response.body.balance).toMatch(/^R\$ [0-9]*,[0-9][0-9]$/);
         })
 
         it('deve retornar um erro quando buscar o saldo de uma conta inexistente', async () => {
@@ -30,9 +57,7 @@ describe('Accounts', () => {
             const token = await generateBearerToken(userData);
             const accountData = apiDataLoad('accounts', 'invalid_name');
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'inexistent_account');
             expect(response.statusCode).toBe(expectedError.status);
@@ -43,7 +68,7 @@ describe('Accounts', () => {
 
         it('deve retornar um erro ao tentar buscar o saldo de uma conta sem passar o bearer token', async () => {
             const accountData = apiDataLoad('accounts', 'valid');
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id));
+            const response = await BalaceRequest.getAccountBalance(accountData);
 
             const expectedError = apiDataLoad('default_errors', 'missing_bearer_token')
             expect(response.statusCode).toBe(expectedError.status);
@@ -54,9 +79,7 @@ describe('Accounts', () => {
             const accountData = apiDataLoad('accounts', 'valid');
             const token = apiDataLoad('tokens', 'expired').value;
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'expired_bearer_token')
             expect(response.statusCode).toBe(expectedError.status);
@@ -67,9 +90,7 @@ describe('Accounts', () => {
             const accountData = apiDataLoad('accounts', 'valid');
             const token = apiDataLoad('tokens', 'invalid_value').value;
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_format')
             expect(response.statusCode).toBe(expectedError.status);
@@ -80,9 +101,7 @@ describe('Accounts', () => {
             const accountData = apiDataLoad('accounts', 'valid');
             const token = apiDataLoad('tokens', 'invalid_type').value;
 
-            const response = await request(baseUrl).get(endpointPath.replace('{accountId}', accountData.id)).set({
-                Authorization: token
-            });
+            const response = await BalaceRequest.getAccountBalance(accountData, token);
 
             const expectedError = apiDataLoad('default_errors', 'invalid_token_type')
             expect(response.statusCode).toBe(expectedError.status);
